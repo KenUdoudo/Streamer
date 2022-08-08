@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Streaming</title>
+  <link rel="stylesheet" href="./index.css">
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+</head>
+<body>
+  <div class="hero">
+    <div class="music">
+      <p>Artists: Major Lazer feat. Mr. Eazi, Raye & Jake Gosling</p>
+      <h1>Tied up</h1>
+      <div class="track">
+        <img src="./play.png" id="playBtn">
+        <div id="waveform"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var playBtn = document.getElementById("playBtn")
+
+
+    var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: '#ddd',
+      progressColor: '#ff006c',
+      barWidth: 4,
+      responsive: true,
+      height: 90,
+      barRadius: 4
+    });
+    wavesurfer.load('./Major_Lazer_-_Tied_Up_(feat._Mr._Eazi,_Raye_&_Jake_Gosling)_(Official_Music_Video.mp3)');
+
+    playBtn.onclick = function(){
+      wavesurfer.playPause();
+      if(playBtn.src.includes("play.png")){
+        playBtn.src = "./pause.png";
+      }else{
+        playBtn.src = "./play.png";
+      }
+    }
+    wavesurfer.on('finish', function(){
+      playBtn.src = "./play.png";
+      wavesurfer.stop()
+    })
+  </script>
+</body>
+</html>
